@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\raghavme\\source\\repos\\API\\API\\API.csproj": {}
+    "C:\\Users\\mohitsin\\Source\\Repos\\Raghav-99\\E-CommAPI\\API\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\raghavme\\source\\repos\\API\\API\\API.csproj": {
+    "C:\\Users\\mohitsin\\Source\\Repos\\Raghav-99\\E-CommAPI\\API\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\raghavme\\source\\repos\\API\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\mohitsin\\Source\\Repos\\Raghav-99\\E-CommAPI\\API\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\raghavme\\source\\repos\\API\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\raghavme\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\raghavme\\source\\repos\\API\\API\\obj\\",
+        "projectPath": "C:\\Users\\mohitsin\\Source\\Repos\\Raghav-99\\E-CommAPI\\API\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\mohitsin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mohitsin\\Source\\Repos\\Raghav-99\\E-CommAPI\\API\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\raghavme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mohitsin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -78,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
