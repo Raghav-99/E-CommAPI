@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mohitsin\\Source\\Repos\\Raghav-99\\E-CommAPI\\API\\API\\API.csproj": {}
+    "C:\\Users\\raghavme\\Documents\\Major\\E-CommAPI\\API\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mohitsin\\Source\\Repos\\Raghav-99\\E-CommAPI\\API\\API\\API.csproj": {
+    "C:\\Users\\raghavme\\Documents\\Major\\E-CommAPI\\API\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mohitsin\\Source\\Repos\\Raghav-99\\E-CommAPI\\API\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\raghavme\\Documents\\Major\\E-CommAPI\\API\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\mohitsin\\Source\\Repos\\Raghav-99\\E-CommAPI\\API\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\mohitsin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mohitsin\\Source\\Repos\\Raghav-99\\E-CommAPI\\API\\API\\obj\\",
+        "projectPath": "C:\\Users\\raghavme\\Documents\\Major\\E-CommAPI\\API\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\raghavme\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\raghavme\\Documents\\Major\\E-CommAPI\\API\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mohitsin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\raghavme\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[7.0.0, )"
             },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[6.0.10, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
@@ -78,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

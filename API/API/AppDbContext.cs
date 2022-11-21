@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using API;
 
 namespace API
 {
@@ -8,5 +9,6 @@ namespace API
         {
 
         }
+        public DbSet<API.AdminModel> AdminModel { get; set; }
     }
 }
