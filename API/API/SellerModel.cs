@@ -5,5 +5,6 @@ namespace API
     [Table("tblSeller")]
     public class SellerModel
     {
+
     }
 }
