@@ -9,30 +9,37 @@ using API;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
+using Microsoft.AspNetCore.Cors;
 
 namespace API.Controllers
 {
-    
+    //[Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowAnyOrigin")]
     public class AccountController : ControllerBase
     {
         private readonly AppDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-
+        
         public AccountController(AppDbContext context, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
         }
-
+        [HttpGet]
+        [Route("api/[controller]/login")]
+        public async Task<ActionResult<IEnumerable<IdentityUser>>> GetRegisterModel()
+        {
+            return await _context.Users.ToListAsync();
+        }
 
         // POST: api/Account/register
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [Route("api/[controller]/register")]
         [HttpPost]
-        public async Task<bool> PostRegisterModel(RegisterModel registerModel)
+        public async Task<int> PostRegisterModel(RegisterModel registerModel)
         {
             if(ModelState.IsValid)
             {
@@ -42,16 +49,17 @@ namespace API.Controllers
                 {
                     _context.RegisterModel.Add(registerModel);
                     await _context.SaveChangesAsync();
-                    return true;
+                    return StatusCodes.Status201Created;
                 }
+                return StatusCodes.Status406NotAcceptable;
             }
-            return false;
+            return StatusCodes.Status400BadRequest;
         }
 
         [Route("api/[controller]/login")]
         [HttpPost]
         [Authorize]
-        public async Task<bool> PostLoginModel(LoginModel loginModel)
+        public async Task<int> PostLoginModel(LoginModel loginModel)
         {
             if (ModelState.IsValid)
             {
@@ -59,14 +67,15 @@ namespace API.Controllers
 
                 if(result.Succeeded)
                 {
-                    return true;
+                    return StatusCodes.Status200OK;
                 }
+                return StatusCodes.Status401Unauthorized;
             }
-            return false;
+            return StatusCodes.Status400BadRequest;
         }
 
         // DELETE: api/Register/5
-        [HttpDelete("{id}")]
+        [HttpDelete("api/[controller]/{id}")]
         public async Task<IActionResult> DeleteRegisterModel(string id)
         {
             var registerModel = await _context.RegisterModel.FindAsync(id);

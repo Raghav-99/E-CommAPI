@@ -16,15 +16,15 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkSto
 /*builder.Services.ConfigureApplicationCookie(options =>
 {
     // Cookie settings
-    options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+    *//*options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);*//*
 
-    options.ReturnUrlParameter = "http://localhost:4200/";
-    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-    options.SlidingExpiration = true;
+    options.ReturnUrlParameter = null;
+    *//*options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.SlidingExpiration = true;*//*
 });*/
 
-builder.Services.AddCors(setupAction: options => options.AddPolicy("policyAdmin", 
+builder.Services.AddCors(setupAction: options => options.AddPolicy("AllowAnyOrigin", 
     policy => policy.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader()));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API;
+using Microsoft.AspNetCore.Cors;
 
 namespace API.Controllers
 {
+    [EnableCors("AllowAnyOrigin")]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
