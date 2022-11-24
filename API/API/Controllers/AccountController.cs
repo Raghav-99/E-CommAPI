@@ -7,33 +7,32 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
-    public class RegisterController : ControllerBase
+    public class AccountController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private UserManager<IdentityUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public RegisterController(AppDbContext context, UserManager<IdentityUser> userManager)
+        public AccountController(AppDbContext context, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _context = context;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
-/*
-        [HttpGet]
-        [ActionName("GetUser")]
-        public async Task<ActionResult<IEnumerable<RegisterModel>>> GetUser()
-        {
-            return await _context.RegisterModel.ToListAsync();
-        }*/
 
-        // POST: api/Register
+
+        // POST: api/Account/register
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Route("api/[controller]/register")]
         [HttpPost]
-        public async Task<ActionResult<RegisterModel>> PostRegisterModel(RegisterModel registerModel)
+        public async Task<bool> PostRegisterModel(RegisterModel registerModel)
         {
             if(ModelState.IsValid)
             {
@@ -43,12 +42,27 @@ namespace API.Controllers
                 {
                     _context.RegisterModel.Add(registerModel);
                     await _context.SaveChangesAsync();
-                    //return CreatedAtAction("GetUser", new {user = registerModel.Username}, user);
+                    return true;
                 }
-                else
-                    return BadRequest(result);
             }
-            return BadRequest(ModelState);
+            return false;
+        }
+
+        [Route("api/[controller]/login")]
+        [HttpPost]
+        [Authorize]
+        public async Task<bool> PostLoginModel(LoginModel loginModel)
+        {
+            if (ModelState.IsValid)
+            {
+                SignInResult result = await _signInManager.PasswordSignInAsync(loginModel.Username, loginModel.Password, loginModel.RememberMe, false);
+
+                if(result.Succeeded)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         // DELETE: api/Register/5

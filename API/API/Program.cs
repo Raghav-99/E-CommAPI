@@ -13,6 +13,17 @@ builder.Services.AddDbContext<AppDbContext>(optionsAction:
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
+/*builder.Services.ConfigureApplicationCookie(options =>
+{
+    // Cookie settings
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+    options.ReturnUrlParameter = "http://localhost:4200/";
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.SlidingExpiration = true;
+});*/
+
 builder.Services.AddCors(setupAction: options => options.AddPolicy("policyAdmin", 
     policy => policy.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader()));
 
@@ -30,8 +41,9 @@ if (app.Environment.IsDevelopment())
 }
 app.UseRouting();
 app.UseCors();
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
+
 
 app.MapControllers();
 
