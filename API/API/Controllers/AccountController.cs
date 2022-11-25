@@ -58,7 +58,7 @@ namespace API.Controllers
 
         [Route("api/[controller]/login")]
         [HttpPost]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<int> PostLoginModel(LoginModel loginModel)
         {
             if (ModelState.IsValid)
