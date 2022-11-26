@@ -8,25 +8,18 @@ namespace API
     {
         [Required, Key]
         public string? Username { get; set; }
-        [Required]
+        [Required, StringLength(20, MinimumLength = 3, ErrorMessage = "Full name must be of length b/w 3 and 20")]
         public string? FullName { get; set; }
-        [Required]
-        public string? Email { get; set; }
-        [Required]
+        [Required, StringLength(5, MinimumLength = 3, ErrorMessage = "Question cannot exceed length of 30")]
         public string? SecurityQuestion { get; set; }
-        [Required, StringLength(20)]
+        [Required, StringLength(20, MinimumLength = 5, ErrorMessage = "Answer should be of min length 5 and max length 20")]
         public string? Answer { get; set; }
-
+        [Required, DataType(DataType.PhoneNumber)]
         public string? PhoneNo { get; set; }
-        [Required, StringLength(30, MinimumLength = 10)]
+        [Required, StringLength(20, MinimumLength = 5, ErrorMessage = "Shop name must be from length 5 to 20(including)")]
         public string? ShopName { get; set; }
-        [Required, StringLength(10, MinimumLength = 5)]
+        [Required, StringLength(5,MinimumLength = 5, ErrorMessage = "Enter the 5 character registration no to register")]
         public string? ShopRegNo { get; set; }
-        [StringLength(50, MinimumLength = 5)]
-        public string? ProductName { get; set; }
-        [StringLength(300, MinimumLength = 50)]
-        public string? ProductDetails { get; set; }
-
 
     }
 }

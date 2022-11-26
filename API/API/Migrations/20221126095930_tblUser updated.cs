@@ -8,9 +8,9 @@ namespace API.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
+/*            migrationBuilder.DropColumn(
                 name: "DateOfBirth",
-                table: "tblUser");
+                table: "tblUser");*/
 
             migrationBuilder.AlterColumn<string>(
                 name: "Answer",
@@ -69,12 +69,12 @@ namespace API.Migrations
                 oldType: "nvarchar(20)",
                 oldMaxLength: 20,
                 oldNullable: true);
-
+/*
             migrationBuilder.AddColumn<string>(
                 name: "DateOfBirth",
                 table: "tblUser",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true);*/
         }
     }
 }

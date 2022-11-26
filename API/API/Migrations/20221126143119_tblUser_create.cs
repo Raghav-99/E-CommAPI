@@ -5,13 +5,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    /// <inheritdoc />
-    public partial class DbInit : Migration
+    public partial class tblUser_create : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            /*migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -23,7 +21,7 @@ namespace API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });*/
+                });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
@@ -61,6 +59,57 @@ namespace API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LoginModel", x => x.Username);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RegisterModel",
+                columns: table => new
+                {
+                    Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ConfirmPassword = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RegisterModel", x => x.Username);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tblSeller",
+                columns: table => new
+                {
+                    Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SecurityQuestion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Answer = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShopName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    ShopRegNo = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ProductDetails = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tblSeller", x => x.Username);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tblUser",
+                columns: table => new
+                {
+                    Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    SecQuestion = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true),
+                    Answer = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tblUser", x => x.Username);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,7 +258,6 @@ namespace API.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
@@ -229,6 +277,15 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "LoginModel");
+
+            migrationBuilder.DropTable(
+                name: "RegisterModel");
+
+            migrationBuilder.DropTable(
+                name: "tblSeller");
+
+            migrationBuilder.DropTable(
+                name: "tblUser");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
