@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API;
 using Microsoft.AspNetCore.Cors;
+using System.Net;
 
 namespace API.Controllers
 {
@@ -77,7 +78,7 @@ namespace API.Controllers
         // POST: api/User
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<UserModel>> PostUserModel(UserModel userModel)
+        public async Task<ActionResult<HttpStatusCode>> PostUserModel(UserModel userModel)
         {
             _context.UserModel.Add(userModel);
             try
@@ -96,7 +97,7 @@ namespace API.Controllers
                 }
             }
 
-            return CreatedAtAction("GetUserModel", new { id = userModel.Username }, userModel);
+            return HttpStatusCode.Created;
         }
 
         // DELETE: api/User/5

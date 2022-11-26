@@ -11,8 +11,8 @@ namespace API
 
         }
         public DbSet<API.LoginModel> LoginModel { get; set; }
-        public DbSet<API.RegisterModel> RegisterModel { get; set; }
         public DbSet<API.UserModel> UserModel { get; set; }
+        public DbSet<API.RegisterModel> RegisterModel { get; set; }
         public DbSet<API.SellerModel> SellerModel { get; set; }
         
     }
