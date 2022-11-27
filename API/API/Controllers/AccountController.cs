@@ -54,17 +54,24 @@ namespace API.Controllers
         [Route("api/[controller]/login")]
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult<HttpStatusCode>> PostLoginModel(LoginModel loginModel)
+        public async Task<ActionResult<HttpStatusCode>> PostLoginModel(LoginModel loginModel, [FromQuery] string roleId)
         {
             if (ModelState.IsValid)
             {
-                SignInResult result = await _signInManager.PasswordSignInAsync(loginModel.Username, loginModel.Password, loginModel.RememberMe, false);
-
-                if(result.Succeeded)
+                var user = await _userManager.FindByNameAsync(loginModel.Username);
+                if(user != null)
                 {
-                    return HttpStatusCode.OK;
+                    SignInResult result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, loginModel.RememberMe, false);
+
+                    if (result.Succeeded)
+                    {
+                        if((roleId == "1" && user.UserName == "admin") ||
+                            (roleId == "2" && _context.SellerModel.Single().Username == user.UserName) ||
+                            (roleId == "3" && _context.UserModel.Single().Username == user.UserName))
+                            { return HttpStatusCode.Redirect; }
+                    }
+                    return HttpStatusCode.Unauthorized;
                 }
-                return HttpStatusCode.Unauthorized;
             }
             return HttpStatusCode.BadRequest;
         }
