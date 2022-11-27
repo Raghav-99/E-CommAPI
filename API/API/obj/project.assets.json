@@ -10460,19 +10460,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\raghavme\\.nuget\\packages\\": {}
+    "C:\\Users\\ragha\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\raghavme\\Documents\\Major\\E-CommAPI\\API\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\ragha\\OneDrive\\Documents\\Major Project\\E-CommAPI\\API\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\raghavme\\Documents\\Major\\E-CommAPI\\API\\API\\API.csproj",
-      "packagesPath": "C:\\Users\\raghavme\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\raghavme\\Documents\\Major\\E-CommAPI\\API\\API\\obj\\",
+      "projectPath": "C:\\Users\\ragha\\OneDrive\\Documents\\Major Project\\E-CommAPI\\API\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\ragha\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ragha\\OneDrive\\Documents\\Major Project\\E-CommAPI\\API\\API\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\raghavme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ragha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10480,6 +10485,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
