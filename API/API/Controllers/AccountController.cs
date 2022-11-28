@@ -66,8 +66,8 @@ namespace API.Controllers
                     if (result.Succeeded)
                     {
                         if((roleId == "1" && user.UserName == "admin") ||
-                            (roleId == "2" && _context.SellerModel.Single().Username == user.UserName) ||
-                            (roleId == "3" && _context.UserModel.Single().Username == user.UserName))
+                            (roleId == "2" && _context.SellerModel != null && _context.SellerModel.Single().Username == user.UserName) ||
+                            (roleId == "3" && _context.UserModel != null && _context.UserModel.Single().Username == user.UserName))
                             { return HttpStatusCode.Redirect; }
                     }
                     return HttpStatusCode.Unauthorized;
@@ -80,13 +80,19 @@ namespace API.Controllers
         [HttpDelete("api/[controller]/{id}")]
         public async Task<IActionResult> DeleteRegisterModel(string id)
         {
-            var registerModel = await _context.RegisterModel.FindAsync(id);
+            var user = await _userManager.FindByNameAsync(id);
+            /*var registerModel = await _context.RegisterModel.FindAsync(id);
             if (registerModel == null)
             {
                 return NotFound();
             }
 
-            _context.RegisterModel.Remove(registerModel);
+            _context.RegisterModel.Remove(registerModel);*/
+            if(user == null)
+            {
+                return NotFound();
+            }
+            await _userManager.DeleteAsync(user);
             await _context.SaveChangesAsync();
 
             return NoContent();
