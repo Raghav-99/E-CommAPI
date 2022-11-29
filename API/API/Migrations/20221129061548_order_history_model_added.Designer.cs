@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221127064706_fk_testing")]
-    partial class fk_testing
+    [Migration("20221129061548_order_history_model_added")]
+    partial class order_history_model_added
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,9 +36,13 @@ namespace API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CId");
+
+                    b.HasIndex("PId");
+
+                    b.HasIndex("Username");
 
                     b.ToTable("tblCommodities");
                 });
@@ -60,6 +64,39 @@ namespace API.Migrations
                     b.ToTable("LoginModel");
                 });
 
+            modelBuilder.Entity("API.OrderHistoryModel", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Sellername")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("PId");
+
+                    b.HasIndex("Sellername");
+
+                    b.HasIndex("Username");
+
+                    b.ToTable("tblOrderHistory");
+                });
+
             modelBuilder.Entity("API.ProductsModel", b =>
                 {
                     b.Property<int>("PId")
@@ -71,6 +108,9 @@ namespace API.Migrations
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<int>("ProductCount")
                         .HasColumnType("int");
@@ -120,7 +160,7 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.SellerModel", b =>
                 {
-                    b.Property<string>("Username")
+                    b.Property<string>("Sellername")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Answer")
@@ -152,7 +192,7 @@ namespace API.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
 
-                    b.HasKey("Username");
+                    b.HasKey("Sellername");
 
                     b.ToTable("tblSeller");
                 });
@@ -388,6 +428,50 @@ namespace API.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("API.CommodityMapModel", b =>
+                {
+                    b.HasOne("API.ProductsModel", "ProductsModel")
+                        .WithMany()
+                        .HasForeignKey("PId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.SellerModel", "SellerModel")
+                        .WithMany()
+                        .HasForeignKey("Username");
+
+                    b.Navigation("ProductsModel");
+
+                    b.Navigation("SellerModel");
+                });
+
+            modelBuilder.Entity("API.OrderHistoryModel", b =>
+                {
+                    b.HasOne("API.ProductsModel", "ProductsModel")
+                        .WithMany()
+                        .HasForeignKey("PId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.SellerModel", "SellerModel")
+                        .WithMany()
+                        .HasForeignKey("Sellername")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.UserModel", "UserModel")
+                        .WithMany()
+                        .HasForeignKey("Username")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductsModel");
+
+                    b.Navigation("SellerModel");
+
+                    b.Navigation("UserModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

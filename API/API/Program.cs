@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>(optionsAction: 
-    options => options.UseSqlServer(builder.Configuration.GetConnectionString("loc_raghav")));
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("rem_raghav")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 

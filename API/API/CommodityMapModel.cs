@@ -14,7 +14,9 @@ namespace API
         public int CId { get; set; }
         [ForeignKey("SellerModel")]
         public string? Username { get; set; }
-        [ForeignKey("ProductModel")]
+        public SellerModel? SellerModel { get; set; }
+        [ForeignKey("ProductsModel")]
         public int PId { get; set; }
+        public ProductsModel? ProductsModel { get; set; }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221126220057_tblCommodities_fk_updated")]
-    partial class tblCommodities_fk_updated
+    [Migration("20221129052442_fk_relation_updated")]
+    partial class fk_relation_updated
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,17 +32,20 @@ namespace API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CId"), 1L, 1);
 
-                    b.Property<int?>("ProductPId")
+                    b.Property<int>("PId")
                         .HasColumnType("int");
 
-                    b.Property<string>("SellerUsername")
+                    b.Property<int?>("ProductsModelPId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SellerModelUsername")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CId");
 
-                    b.HasIndex("ProductPId");
+                    b.HasIndex("ProductsModelPId");
 
-                    b.HasIndex("SellerUsername");
+                    b.HasIndex("SellerModelUsername");
 
                     b.ToTable("tblCommodities");
                 });
@@ -75,6 +78,9 @@ namespace API.Migrations
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<int>("ProductCount")
                         .HasColumnType("int");
@@ -396,17 +402,17 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.CommodityMapModel", b =>
                 {
-                    b.HasOne("API.ProductsModel", "Product")
+                    b.HasOne("API.ProductsModel", "ProductsModel")
                         .WithMany()
-                        .HasForeignKey("ProductPId");
+                        .HasForeignKey("ProductsModelPId");
 
-                    b.HasOne("API.SellerModel", "Seller")
+                    b.HasOne("API.SellerModel", "SellerModel")
                         .WithMany()
-                        .HasForeignKey("SellerUsername");
+                        .HasForeignKey("SellerModelUsername");
 
-                    b.Navigation("Product");
+                    b.Navigation("ProductsModel");
 
-                    b.Navigation("Seller");
+                    b.Navigation("SellerModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

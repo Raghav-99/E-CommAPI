@@ -4,40 +4,33 @@
 
 namespace API.Migrations
 {
-    public partial class fk_testing : Migration
+    public partial class fk_relation_fix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_tblCommodities_tblProducts_ProductPId",
+                name: "FK_tblCommodities_tblProducts_ProductsModelPId",
                 table: "tblCommodities");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_tblCommodities_tblSeller_SellerUsername",
+                name: "FK_tblCommodities_tblSeller_SellerModelUsername",
                 table: "tblCommodities");
 
             migrationBuilder.DropIndex(
-                name: "IX_tblCommodities_ProductPId",
+                name: "IX_tblCommodities_ProductsModelPId",
                 table: "tblCommodities");
 
             migrationBuilder.DropIndex(
-                name: "IX_tblCommodities_SellerUsername",
+                name: "IX_tblCommodities_SellerModelUsername",
                 table: "tblCommodities");
 
             migrationBuilder.DropColumn(
-                name: "ProductPId",
+                name: "ProductsModelPId",
                 table: "tblCommodities");
 
             migrationBuilder.DropColumn(
-                name: "SellerUsername",
+                name: "SellerModelUsername",
                 table: "tblCommodities");
-
-            migrationBuilder.AddColumn<int>(
-                name: "PId",
-                table: "tblCommodities",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
 
             migrationBuilder.AddColumn<string>(
                 name: "Username",
@@ -49,46 +42,42 @@ namespace API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "PId",
-                table: "tblCommodities");
-
-            migrationBuilder.DropColumn(
                 name: "Username",
                 table: "tblCommodities");
 
             migrationBuilder.AddColumn<int>(
-                name: "ProductPId",
+                name: "ProductsModelPId",
                 table: "tblCommodities",
                 type: "int",
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "SellerUsername",
+                name: "SellerModelUsername",
                 table: "tblCommodities",
                 type: "nvarchar(450)",
                 nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_tblCommodities_ProductPId",
+                name: "IX_tblCommodities_ProductsModelPId",
                 table: "tblCommodities",
-                column: "ProductPId");
+                column: "ProductsModelPId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tblCommodities_SellerUsername",
+                name: "IX_tblCommodities_SellerModelUsername",
                 table: "tblCommodities",
-                column: "SellerUsername");
+                column: "SellerModelUsername");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_tblCommodities_tblProducts_ProductPId",
+                name: "FK_tblCommodities_tblProducts_ProductsModelPId",
                 table: "tblCommodities",
-                column: "ProductPId",
+                column: "ProductsModelPId",
                 principalTable: "tblProducts",
                 principalColumn: "PId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_tblCommodities_tblSeller_SellerUsername",
+                name: "FK_tblCommodities_tblSeller_SellerModelUsername",
                 table: "tblCommodities",
-                column: "SellerUsername",
+                column: "SellerModelUsername",
                 principalTable: "tblSeller",
                 principalColumn: "Username");
         }

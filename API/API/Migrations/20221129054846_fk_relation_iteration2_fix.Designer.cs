@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221127113741_price_column_added")]
-    partial class price_column_added
+    [Migration("20221129054846_fk_relation_iteration2_fix")]
+    partial class fk_relation_iteration2_fix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,9 +36,13 @@ namespace API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CId");
+
+                    b.HasIndex("PId");
+
+                    b.HasIndex("Username");
 
                     b.ToTable("tblCommodities");
                 });
@@ -391,6 +395,23 @@ namespace API.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("API.CommodityMapModel", b =>
+                {
+                    b.HasOne("API.ProductsModel", "ProductsModel")
+                        .WithMany()
+                        .HasForeignKey("PId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.SellerModel", "SellerModel")
+                        .WithMany()
+                        .HasForeignKey("Username");
+
+                    b.Navigation("ProductsModel");
+
+                    b.Navigation("SellerModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

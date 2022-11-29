@@ -16,5 +16,6 @@ namespace API
         public DbSet<API.SellerModel> SellerModel { get; set; }
         public DbSet<API.ProductsModel> ProductsModel { get; set; }
         public DbSet<API.CommodityMapModel> CommodityMapModel { get; set; }
+        public DbSet<API.OrderHistoryModel> OrderHistoryModel { get; set; }
     }
 }

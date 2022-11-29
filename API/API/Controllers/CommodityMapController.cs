@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API;
+using Microsoft.AspNetCore.Cors;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowAnyOrigin")]
     public class CommodityMapController : ControllerBase
     {
         private readonly AppDbContext _context;

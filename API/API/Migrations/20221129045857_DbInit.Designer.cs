@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221126204213_DBInit")]
-    partial class DBInit
+    [Migration("20221129045857_DbInit")]
+    partial class DbInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,35 @@ namespace API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("API.CommodityMapModel", b =>
+                {
+                    b.Property<int>("CId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CId"), 1L, 1);
+
+                    b.Property<int>("PId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductsModelPId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SUname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SellerModelUsername")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CId");
+
+                    b.HasIndex("ProductsModelPId");
+
+                    b.HasIndex("SellerModelUsername");
+
+                    b.ToTable("tblCommodities");
+                });
 
             modelBuilder.Entity("API.LoginModel", b =>
                 {
@@ -39,6 +68,43 @@ namespace API.Migrations
                     b.HasKey("Username");
 
                     b.ToTable("LoginModel");
+                });
+
+            modelBuilder.Entity("API.ProductsModel", b =>
+                {
+                    b.Property<int>("PId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PId"), 1L, 1);
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ProductCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProductDescription")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("ProductType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PId");
+
+                    b.ToTable("tblProducts");
                 });
 
             modelBuilder.Entity("API.RegisterModel", b =>
@@ -335,6 +401,21 @@ namespace API.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("API.CommodityMapModel", b =>
+                {
+                    b.HasOne("API.ProductsModel", "ProductsModel")
+                        .WithMany()
+                        .HasForeignKey("ProductsModelPId");
+
+                    b.HasOne("API.SellerModel", "SellerModel")
+                        .WithMany()
+                        .HasForeignKey("SellerModelUsername");
+
+                    b.Navigation("ProductsModel");
+
+                    b.Navigation("SellerModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

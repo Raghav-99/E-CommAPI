@@ -7,7 +7,7 @@ namespace API
     public class SellerModel
     {
         [Required, Key]
-        public string? Username { get; set; }
+        public string? Sellername { get; set; }
         [Required, StringLength(20, MinimumLength = 3, ErrorMessage = "Full name must be of length b/w 3 and 20")]
         public string? FullName { get; set; }
         [Required, StringLength(5, MinimumLength = 3, ErrorMessage = "Question cannot exceed length of 30")]

@@ -49,7 +49,7 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSellerModel(string id, SellerModel sellerModel)
         {
-            if (id != sellerModel.Username)
+            if (id != sellerModel.Sellername)
             {
                 return BadRequest();
             }
@@ -87,7 +87,7 @@ namespace API.Controllers
             }
             catch (DbUpdateException)
             {
-                if (SellerModelExists(sellerModel.Username))
+                if (SellerModelExists(sellerModel.Sellername))
                 {
                     return Conflict();
                 }
@@ -118,7 +118,7 @@ namespace API.Controllers
 
         private bool SellerModelExists(string id)
         {
-            return _context.SellerModel.Any(e => e.Username == id);
+            return _context.SellerModel.Any(e => e.Sellername == id);
         }
     }
 }

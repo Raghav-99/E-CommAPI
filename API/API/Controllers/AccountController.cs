@@ -66,7 +66,7 @@ namespace API.Controllers
                     if (result.Succeeded)
                     {
                         if((roleId == "1" && user.UserName == "admin") ||
-                            (roleId == "2" && _context.SellerModel != null && _context.SellerModel.Single().Username == user.UserName) ||
+                            (roleId == "2" && _context.SellerModel != null && _context.SellerModel.Single().Sellername == user.UserName) ||
                             (roleId == "3" && _context.UserModel != null && _context.UserModel.Single().Username == user.UserName))
                             { return HttpStatusCode.Redirect; }
                     }
