@@ -20,8 +20,8 @@ namespace API
             ErrorMessage = "Product description must be of min length 5 and max length 100")]
         public string? ProductDescription { get; set; }
         [Required]
-        [RegularExpression(@"Electronics|Sports|Grocerries|Clothes", 
-            ErrorMessage = "Allowed product types are: Electronics | Sports | Grocerries | Clothes")]
+        [RegularExpression(@"Electronics|Fashion|Grocerries|Jewllery", 
+            ErrorMessage = "Allowed product types are: Electronics | Fashion | Grocerries | Jewllery")]
         public string? ProductType { get; set; }
         [Required(ErrorMessage = "Product count cannot be NULL")]
         [DefaultValue(0)]

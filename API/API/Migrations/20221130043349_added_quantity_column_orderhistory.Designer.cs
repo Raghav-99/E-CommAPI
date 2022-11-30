@@ -4,6 +4,7 @@ using API;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221130043349_added_quantity_column_orderhistory")]
+    partial class added_quantity_column_orderhistory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +44,7 @@ namespace API.Migrations
 
                     b.HasIndex("Username");
 
-                    b.ToTable("tblCommodities", (string)null);
+                    b.ToTable("tblCommodities");
                 });
 
             modelBuilder.Entity("API.LoginModel", b =>
@@ -59,7 +61,7 @@ namespace API.Migrations
 
                     b.HasKey("Username");
 
-                    b.ToTable("LoginModel", (string)null);
+                    b.ToTable("LoginModel");
                 });
 
             modelBuilder.Entity("API.OrderHistoryModel", b =>
@@ -70,9 +72,8 @@ namespace API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
 
-                    b.Property<string>("OrderDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("PId")
                         .HasColumnType("int");
@@ -96,7 +97,7 @@ namespace API.Migrations
 
                     b.HasIndex("Username");
 
-                    b.ToTable("tblOrderHistory", (string)null);
+                    b.ToTable("tblOrderHistory");
                 });
 
             modelBuilder.Entity("API.ProductsModel", b =>
@@ -133,7 +134,7 @@ namespace API.Migrations
 
                     b.HasKey("PId");
 
-                    b.ToTable("tblProducts", (string)null);
+                    b.ToTable("tblProducts");
                 });
 
             modelBuilder.Entity("API.RegisterModel", b =>
@@ -157,7 +158,7 @@ namespace API.Migrations
 
                     b.HasKey("Username");
 
-                    b.ToTable("RegisterModel", (string)null);
+                    b.ToTable("RegisterModel");
                 });
 
             modelBuilder.Entity("API.SellerModel", b =>
@@ -196,7 +197,7 @@ namespace API.Migrations
 
                     b.HasKey("Sellername");
 
-                    b.ToTable("tblSeller", (string)null);
+                    b.ToTable("tblSeller");
                 });
 
             modelBuilder.Entity("API.UserModel", b =>
@@ -231,7 +232,7 @@ namespace API.Migrations
 
                     b.HasKey("Username");
 
-                    b.ToTable("tblUser", (string)null);
+                    b.ToTable("tblUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace API.Controllers
 {
@@ -42,6 +43,15 @@ namespace API.Controllers
             }
 
             return getProduct;
+        }
+
+        [Route("getallsellers")]
+        [HttpGet]
+        public IQueryable<CommodityMapModel> FindAllSellersByProductId([FromQuery]int id)
+        {
+            var commodityMapModel = _context.CommodityMapModel.Find(id);
+            var getSellers = _context.CommodityMapModel.Where(x => x.PId == id);
+            return getSellers;
         }
 
         // PUT: api/CommodityMap/5

@@ -9,8 +9,8 @@ namespace API
         [Required]
         public int OrderId { get; set; }
         [Required]
-        [DataType(DataType.DateTime)]
-        public DateTime OrderDate { get; set; }
+        
+        public string? OrderDate { get; set; }
         [Required]
         [ForeignKey("UserModel")]
         public string? Username { get; set; }
@@ -25,6 +25,9 @@ namespace API
         [ForeignKey("ProductsModel")]
         public int PId { get; set; }
         public ProductsModel? ProductsModel { get; set; }
+
+        [Required]
+        public int QuantityOrdered { get; set; }
 
     }
 }
