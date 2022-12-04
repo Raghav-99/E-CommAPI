@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace API
+namespace API.Models.Models
 {
     [Keyless]
     public class AccountModel
     {
-       // [Required]
+        // [Required]
         public string? EmailAddress { get; set; }
 
         //[Required, Key]
@@ -42,7 +42,7 @@ namespace API
         //[Required, StringLength(5, MinimumLength = 5, ErrorMessage = "Enter the 5 character registration no to register")]
         public string? ShopRegNo { get; set; }
 
-        
+
 
     }
 }

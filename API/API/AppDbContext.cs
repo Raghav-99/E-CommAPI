@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using API;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using API.Models.Models;
 
 namespace API
 {
@@ -16,6 +16,6 @@ namespace API
         public DbSet<API.SellerModel> SellerModel { get; set; }
         public DbSet<API.ProductsModel> ProductsModel { get; set; }
         public DbSet<API.CommodityMapModel> CommodityMapModel { get; set; }
-        public DbSet<API.OrderHistoryModel> OrderHistoryModel { get; set; }
+        public DbSet<OrderHistoryModel> OrderHistoryModel { get; set; }
     }
 }

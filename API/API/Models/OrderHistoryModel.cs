@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace API
+
+namespace API.Models.Models
 {
     [Table("tblOrderHistory")]
     public class OrderHistoryModel
@@ -9,7 +10,7 @@ namespace API
         [Required]
         public int OrderId { get; set; }
         [Required]
-        
+
         public string? OrderDate { get; set; }
         [Required]
         [ForeignKey("UserModel")]

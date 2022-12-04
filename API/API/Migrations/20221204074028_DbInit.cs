@@ -97,7 +97,7 @@ namespace API.Migrations
                 name: "tblSeller",
                 columns: table => new
                 {
-                    Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Sellername = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     SecurityQuestion = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
                     Answer = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
@@ -107,7 +107,7 @@ namespace API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tblSeller", x => x.Username);
+                    table.PrimaryKey("PK_tblSeller", x => x.Sellername);
                 });
 
             migrationBuilder.CreateTable(
@@ -239,24 +239,58 @@ namespace API.Migrations
                 {
                     CId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SUname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SellerModelUsername = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    PId = table.Column<int>(type: "int", nullable: false),
-                    ProductsModelPId = table.Column<int>(type: "int", nullable: true)
+                    Username = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    PId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tblCommodities", x => x.CId);
                     table.ForeignKey(
-                        name: "FK_tblCommodities_tblProducts_ProductsModelPId",
-                        column: x => x.ProductsModelPId,
+                        name: "FK_tblCommodities_tblProducts_PId",
+                        column: x => x.PId,
                         principalTable: "tblProducts",
-                        principalColumn: "PId");
+                        principalColumn: "PId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_tblCommodities_tblSeller_SellerModelUsername",
-                        column: x => x.SellerModelUsername,
+                        name: "FK_tblCommodities_tblSeller_Username",
+                        column: x => x.Username,
                         principalTable: "tblSeller",
-                        principalColumn: "Username");
+                        principalColumn: "Sellername");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tblOrderHistory",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Sellername = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    PId = table.Column<int>(type: "int", nullable: false),
+                    QuantityOrdered = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tblOrderHistory", x => x.OrderId);
+                    table.ForeignKey(
+                        name: "FK_tblOrderHistory_tblProducts_PId",
+                        column: x => x.PId,
+                        principalTable: "tblProducts",
+                        principalColumn: "PId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_tblOrderHistory_tblSeller_Sellername",
+                        column: x => x.Sellername,
+                        principalTable: "tblSeller",
+                        principalColumn: "Sellername",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_tblOrderHistory_tblUser_Username",
+                        column: x => x.Username,
+                        principalTable: "tblUser",
+                        principalColumn: "Username",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -299,14 +333,29 @@ namespace API.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tblCommodities_ProductsModelPId",
+                name: "IX_tblCommodities_PId",
                 table: "tblCommodities",
-                column: "ProductsModelPId");
+                column: "PId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tblCommodities_SellerModelUsername",
+                name: "IX_tblCommodities_Username",
                 table: "tblCommodities",
-                column: "SellerModelUsername");
+                column: "Username");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tblOrderHistory_PId",
+                table: "tblOrderHistory",
+                column: "PId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tblOrderHistory_Sellername",
+                table: "tblOrderHistory",
+                column: "Sellername");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tblOrderHistory_Username",
+                table: "tblOrderHistory",
+                column: "Username");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -336,7 +385,7 @@ namespace API.Migrations
                 name: "tblCommodities");
 
             migrationBuilder.DropTable(
-                name: "tblUser");
+                name: "tblOrderHistory");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -349,6 +398,9 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "tblSeller");
+
+            migrationBuilder.DropTable(
+                name: "tblUser");
         }
     }
 }

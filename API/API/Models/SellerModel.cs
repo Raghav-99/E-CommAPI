@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace API
+namespace API.Models.Models
 {
     [Table("tblSeller")]
     public class SellerModel
@@ -18,7 +18,7 @@ namespace API
         public string? PhoneNo { get; set; }
         [Required, StringLength(20, MinimumLength = 5, ErrorMessage = "Shop name must be from length 5 to 20(including)")]
         public string? ShopName { get; set; }
-        [Required, StringLength(5,MinimumLength = 5, ErrorMessage = "Enter the 5 character registration no to register")]
+        [Required, StringLength(5, MinimumLength = 5, ErrorMessage = "Enter the 5 character registration no to register")]
         public string? ShopRegNo { get; set; }
 
     }
