@@ -10,12 +10,10 @@ namespace API
         {
 
         }
-        public DbSet<API.LoginModel> LoginModel { get; set; }
-        public DbSet<API.UserModel> UserModel { get; set; }
-        public DbSet<API.RegisterModel> RegisterModel { get; set; }
-        public DbSet<API.SellerModel> SellerModel { get; set; }
-        public DbSet<API.ProductsModel> ProductsModel { get; set; }
-        public DbSet<API.CommodityMapModel> CommodityMapModel { get; set; }
+        public DbSet<UserModel> UserModel { get; set; }
+        public DbSet<SellerModel> SellerModel { get; set; }
+        public DbSet<ProductsModel> ProductsModel { get; set; }
+        public DbSet<CommodityMapModel> CommodityMapModel { get; set; }
         public DbSet<OrderHistoryModel> OrderHistoryModel { get; set; }
     }
 }

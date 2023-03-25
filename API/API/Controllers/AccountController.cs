@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 using Microsoft.AspNetCore.Cors;
 using System.Net;
+using API.Models.Models;
 
 namespace API.Controllers
 {
@@ -66,8 +67,8 @@ namespace API.Controllers
                     if (result.Succeeded)
                     {
                         if((roleId == "1" && user.UserName == "admin") ||
-                            (roleId == "2" && _context.SellerModel != null && _context.SellerModel.Single().Sellername == user.UserName) ||
-                            (roleId == "3" && _context.UserModel != null && _context.UserModel.Single().Username == user.UserName))
+                            (roleId == "2" && _context.SellerModel != null && _context.SellerModel.ToList().Find(x => user.UserName == loginModel.Username) != null) ||
+                            (roleId == "3" && _context.UserModel != null && _context.UserModel.ToList().Find(x => user.UserName == loginModel.Username) != null))
                             { return HttpStatusCode.Redirect; }
                     }
                     return HttpStatusCode.Unauthorized;
@@ -98,9 +99,9 @@ namespace API.Controllers
             return NoContent();
         }
 
-        private bool RegisterModelExists(string id)
-        {
-            return _context.RegisterModel.Any(e => e.Username == id);
-        }
+        //private bool RegisterModelExists(string id)
+        //{
+        //    return RegisterModel.Any(e => e.Username == id);
+        //}
     }
 }
